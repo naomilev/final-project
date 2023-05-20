@@ -70,26 +70,38 @@ STATES_CAPITALS = {
 
 
 def capital_of_Idaho():
-    # Your code here
+    print(STATES_CAPITALS['Idaho'])
+    return
     pass
 
 def all_states():
-    # Your code here
+    print(*STATES_CAPITALS.keys(), sep=', ')
+    return
     pass
 
 def all_capitals():
-    # Your code here
+    print(*STATES_CAPITALS.values(), sep=', ')
+    return
     pass
 
 def states_capitals_string():
-    # Your code here
+    output = ""
+    sorted_dict = dict(sorted(STATES_CAPITALS.items()))
+    for key, value in sorted_dict.items():
+        output += f"{key} -> {value}, "
+    print(output.strip())
+    return
     pass
 
 
 
 def get_state(capital):
+    if list(STATES_CAPITALS.values()).count(capital) == 1:
+        keys = set(key for key, value in STATES_CAPITALS.items() if value == capital)
+        return ', '.join(keys)
+    else:
+        raise KeyError("Value already exists!")
     pass
-
 
 
 def test_state_to_capital():
@@ -108,7 +120,6 @@ def test_capital_to_state():
 def test_capital_to_state_unknown():
     with pytest.raises(KeyError):
         get_state('')
-
 
 def main():
     return pytest.main(__file__)
